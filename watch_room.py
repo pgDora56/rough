@@ -44,7 +44,11 @@ def search_wikipedia(search_word):
     if len(res_list) < 1:
         return "no article"
     if res_list[0] == search_word:
-        return get_wiki_page(res_list[0])
+        try:
+            page_content = get_wiki_page(res_list[0])
+            return page_content
+        except:
+            print("can't get page -> show list")
     res = ""
     bef_search_lis = res_list
     for idx, r in enumerate(res_list):
