@@ -21,6 +21,8 @@ async def on_voice_state_update(member, before, after):
 @client.event
 async def on_message(message):
     global watch_channel, notify_channel
+    if message.author.bot: return
+    print(f"Get message: {message.author} > {message.content} (on {message.channel})")
     msg = message.content
     if msg == ":bye":
         await message.channel.send("Bye!")
@@ -49,6 +51,12 @@ def search_wikipedia(search_word):
             return page_content
         except:
             print("can't get page -> show list")
+    if len(res_list) == 1:
+        try:
+            page_content = get_wiki_page(res_list[0])
+            return page_content
+        except:
+            print("can't get solo page -> show list")
     res = ""
     bef_search_lis = res_list
     for idx, r in enumerate(res_list):
@@ -65,8 +73,4 @@ with open("tamayura_discord_token.txt") as f:
     token = f.read().strip()
 
 client.run(token)
-#w = ""
-#while w != "quit":
-#    w = input()
-#    print(search_wikipedia(w))
 
