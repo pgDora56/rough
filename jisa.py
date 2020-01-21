@@ -165,9 +165,10 @@ person = ["ももさん","天さん","椎菜さん","あきさん"]
 
 answers = []
 for i in range(100):
-    print(f"\nQ{i+1}.")
-    answers.append(formats[random.randint(0,4)].make_question())
+    for j in range(5):
+        print(f"\nQ{i+1}-{j+1}.")
+        answers.append(f"A{i+1}-{j+1}" + str(formats[j].make_question()))
 print("\n")
 for idx, ans in enumerate(answers):
-    print(f"A{idx+1}. {ans}")
+    print(f"{ans}")
 
